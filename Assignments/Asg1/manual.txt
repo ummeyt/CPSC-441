@@ -1,0 +1,53 @@
+/**********************************************
+ * Last Name:   Tashnim
+ * First Name:  Ummey Zarin
+ * Student ID:  30034931
+ * Course:      CPSC 441
+ * Tutorial:    03
+ * Assignment:  1
+ *********************************************/
+
+USER MANUAL:
+To use the Web Proxy:
+1. Go to a web browser (I used Firefox)
+2. Open menu on the right side of the URL and search bar
+3. Select "Preferences"
+4. Go down to Network Proxy
+5. Click "Settings..."
+6. Change the Configure Proxy Access to the Internet to "Manual proxy configuration"
+7. Type "localhost" on HTTP proxy and "12345" on the port
+8. Click "Use this proxy server for all protocols"
+7. Click "Ok" to finish
+
+How to compile this program:
+gcc proxy.c -o proxy
+
+How to run this program:
+./proxy
+
+After running this program, go to the web browser and type in an url
+(ie.http://pages.cpsc.ucalgary.ca/~carey/CPSC441/test3.html) then press enter to load the page.
+If it says's "HTTP/1.1 304 Not Modified" then simply press CTRL-F5 then it will respond with
+HTTP/1.1200 OK. You may redirect to another page if you desire.
+Lastly, to exit the program press CTRL-c.
+
+The testing of this program was done solely at the university.
+The things that work are the proxy and redirecting.
+Although I am able to parse through the HTTP requests and responses correctly (I tested by printing it
+out), I am unable to insert random characters anywhere except from the beginning or the end of a line
+because of the way my parsing is done.
+
+As for things that don't work (or isn't doing what it's supposed to), one of them is my function for
+parsing through the body of the HTTP reponse and seperating the header from the body.
+
+Things that I have yet implement:
+1. Parsing to find the Content-Type (but I do get the Content-Length with the contentLength func)
+2. Inserting the error based on Content-Type (only on txt and html files)
+
+But I was able to make a function that prints a random character called randomChar
+
+Unfortunately, I wasn't able to experiment much with HTTP parsing due to being stuck all the times.
+So, I admit this assignment was quite hard (if only) to implement the ideas that I've had.
+I came up with different ways to parse yet they all seem to not do what I thought they did.
+
+NOTE: If the program outputs "Binding failed." then change the PORT inside proxy.c and firefox settings OR wait for a moment (about a minute).

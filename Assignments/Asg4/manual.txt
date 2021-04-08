@@ -1,0 +1,44 @@
+USER MANUAL:
+Compiling: gcc jumpingbozons.c -lm
+Run: ./a.out <M> <S> <Y>
+
+TESTING:
+Most of the testing was done in the UofC MS lab, however some of it was also
+done with my laptop from home.
+
+The summary is in the PDF.
+
+BONUS IMPLEMENTED:
+TO GET BONUS RESULTS: replace "response_time = getExponentialVar();" with
+"response_time = 10.0;"
+
+Normal test results (random duration):
+M = 10, S = 50.000 and Y = 25.000
+
+        Total time observing channel: 1000000.000
+        Total silent time = 17929.887990
+        Total melodious time = 87383.914987
+        Total screechy time = 894690.846529
+        SILENT time on the channel = 1.793%
+        MELODIOUS time on the channel = 8.738%
+        SCREECHY time on the channel = 89.469%
+        Attempted yodel time = 132829.000000
+        Perfect yodel percentage = 14.354%
+
+Bonus test results (fixed time duration is 1000000.0):
+M = 10, S = 50.000 and Y = 25.000
+
+        Total time observing channel: 1000000.000
+        Total silent time = 164849.584210
+        Total melodious time = 322420.157968
+        Total screechy time = 512739.405933
+        SILENT time on the channel = 16.485%
+        MELODIOUS time on the channel = 32.242%
+        SCREECHY time on the channel = 51.273%
+        Attempted yodel time = 166153.000000
+        Perfect yodel percentage = 54.203%
+
+According to the results, performance becomes much better as the silent
+percentage increases by ~15%, the melodious percentage also inceases by 23%,
+and the screechy percentage decreases by about 40%. The attempted yodel time
+increases while the perfect yodel percentage increases significantly (~40%).

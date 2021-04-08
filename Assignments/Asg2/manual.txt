@@ -1,0 +1,86 @@
+/**********************************************
+ * Last Name:   Tashnim
+ * First Name:  Ummey Zarin
+ * Student ID:  30034931
+ * Course:      CPSC 441
+ * Tutorial:    03
+ * Assignment:  2
+ *********************************************/
+
+USER MANUAL:
+To compile cryptoserver.cpp: g++ cryptoserver.cpp -o s
+To compile cryptoclient.c: gcc cryptoclient.c -o c
+
+NOTE: Make sure you change the hard coded IP address in the client code to
+      your IP address, which can be found through the ifconfig command
+      
+To run:
+1) Open two terminals side-by-side
+2) Compile cryptoserver.cpp in one terminal
+3) Compile cryptoclient.c in the other terminal
+4) Run cryptoserver.cpp first: ./s
+5) Then run cryptoclient.c: ./c
+6) Choose your option (encode/decode/quit) in your client terminal
+7) If you choose encode/decode, then write something and the encode/decode should
+   appear on the server terminal
+
+
+DESIGN CHOICE:
+For this assignment, I chose TCP as my transport-layer protocol because although
+TCP is slow, it is reliable for data transfer unlike UDP.
+The server handles a full sentence at a time (session-oriented).
+For distinguishing encoding request from a decoding request, I check if the string
+contains all digits or not. If it contains all digits then it's trying to decode.
+Of course for "0x" encoding, I made sure "0x" is ignored so that it doesn't
+include the "x" as non-digit.
+As for error conditions handling, both the client and server handles it.
+The client prints if the socket was created successfully, if its connected, if
+the option you picked (encoding(1)/decoding(2)/exit(1)) is valid or not, and if
+the server failed somehow. 
+The server prints if the socket was created successfully, if it was binded, if
+its listening, what port number its listening to, if it was accepted, and what it
+receives. If any of that fails, it prints out what failed.
+
+Fortunately, I don't have to dealing with the cases where multiple words have the
+same encoding for my hash function because I have a random number generator that
+will encode different words with a random number from the range 1 to 1000 and I'm
+also using mapping, which doesn't allow duplicates so it's very unlikely that
+multiple words will have the same encoding. But if for some reason, it does happen
+because the range is too small then I simply have to increase it.
+
+If the user ever tries to decode a hash value that doesn't exist in the server's
+database then it will simple print that the decode doesn't exist.
+
+Since I'm using TCP it's unlikely that the packet would get lost, however if it
+does happen then it prints that the server failed. As for if the server doesn't
+respond then it's also handled because if you uncomment four lines in the client
+code (2 lines from encoding and 2 from decoding), it will print what the server
+sent back so the server will always respond, and the server also prints what it
+receives from the client.
+
+Portability of the code across different networks is high since all that needs to
+be changed is the IP address in the client code.
+For the size/complexity of the code, the hashes are implemented with simple code
+that just requires understanding of the map library.
+Most of testing was done at the university lab, but testing was also done at home.
+
+
+WHAT WORKS:
+1) Client-server interaction with proper use of TCP
+2) Encoding of Sequential Index hash
+3) Encoding of Word Sum hash
+4) Encoding of my own hash
+
+
+WHAT DOES NOT WORK:
+1) Decoding of Sequential Index hash
+2) Decoding of Word Sum hash
+3) Decoding of my own hash
+
+All of my decoding doesn't work because of the same reason. If I was able to
+figure out what the issue was for one then they would all work. According to
+the debugs I did, it's the if condition in my decoding loop, however I
+don't know why that's an issue and how to fix it. When I tested the same
+functions in a different file (test.cpp) without the server-client interaction, it
+works just fine. I have provided the source code for test.cpp if you wish to have
+a look.  

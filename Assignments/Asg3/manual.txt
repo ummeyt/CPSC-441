@@ -1,0 +1,50 @@
+ /****************************************************************
+ * Last Name:   Tashnim
+ * First Name:  Ummey Zarin
+ * Student ID:  30034931
+ * Course:      CPSC 441
+ * Tutorial:    03
+ * Assignment:  3
+ *****************************************************************/
+
+To compile: g++ qos.c -o qos
+To run: ./qos
+
+Summary of observations and recommendations:
+Based on what I've observed from the results of the "what if" questions listed in
+the assignment specs:
+1) The bigger the WiFi Capacity is, the smaller the buffer size should be.
+   For example, while I was testing with different buffer sizes, I noticed when
+   the WiFi Capacity was 6 Mbps, the buffersize that was the most efficient was
+   20. For 11 Mbps, the suitable buffersize for a good trade off is 20. 
+   For 30 Mbps, it was 10. And finally, for 54 Mbps, it was 1.
+2) While the WiFi capacity increases and the buffersize remains 100, the number
+   of packetloss goes down, which will of course result in an increase of delivered
+   packets.
+   For example, for constant buffer size of 100 and 6 Mbps, the packetloss
+   percentage was 12.24%. For 11 Mbps, it was 1.32%, and for 30 Mbps and 54 Mbps,
+   it was 0% and all the packets were delivered.
+
+Based on my observations, there is a simple trade off between the average queueing
+delay for packets in the AP buffer and the packet loss percentage at the wireless
+AP, which is, with a tiny buffer, there will be minimal queueing delay, but there
+is a really high percentage of packet loss.
+But with a large bufer, there is minimal packet loss, but the packet queueing
+delays is long.
+The recommended buffer size when WiFi Capacity is large is a smaller sized buffer.
+
+
+Bonus: Since the bonus says 4 marks are "available for your results, thoughts, and
+observations on this issue", I will explain what I think will happen to the
+quality of service if another employee was watching the movie while the others are
+watching the soccer match.
+I think the qos will be worse because the the number of packets to handle is
+about the same as the soccer game and the there is little gap to no gaps between
+the arrival times. It will have to swap between the soccer game and the movie.
+Thus, the results from before will approximately double in the numbers, so the
+number of packets will double, delivered packets will be less than double because
+the buffer size will remain constant yet there is more packets to handle, which
+will result in an increase of packetloss more than double, and the queueing delay
+will increase because the packets will remain in the buffer for a longer amount
+of time. 
+
